@@ -7,34 +7,37 @@ import EventList from "../../components/events/event-list";
 import EventsSearch from "../../components/events/events-search";
 
 function AllEventsPage({ events }) {
-    const router = useRouter();
+   const router = useRouter();
 
-    function findEventsHandler(year, month) {
-        const fullPath = `/events/${year}/${month}`;
-        router.push(fullPath);
-    }
+   function findEventsHandler(year, month) {
+      const fullPath = `/events/${year}/${month}`;
+      router.push(fullPath);
+   }
 
-    return (
-        <Fragment>
-            <Head>
-                <title>All Events</title>
-                <meta name="description" content="Find a lot of great events that allow you to evolve..." />
-            </Head>
-            <EventsSearch onSearch={findEventsHandler} />
-            <EventList items={events} />
-        </Fragment>
-    );
+   return (
+      <Fragment>
+         <Head>
+            <title>All Events</title>
+            <meta
+               name="description"
+               content="Find a lot of great events that allow you to evolve..."
+            />
+         </Head>
+         <EventsSearch onSearch={findEventsHandler} />
+         <EventList items={events} />
+      </Fragment>
+   );
 }
 
 export default AllEventsPage;
 
 export async function getStaticProps(context) {
-    const events = await getAllEvents();
+   const events = await getAllEvents();
 
-    return {
-        props: {
-            events: events,
-        },
-        revalidate: 60,
-    };
+   return {
+      props: {
+         events: events,
+      },
+      revalidate: 60,
+   };
 }
